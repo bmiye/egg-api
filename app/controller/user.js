@@ -19,7 +19,7 @@ class UserController extends Controller {
         // ctx.logger.info(results);
         ctx.body = {
             code: 0,
-            msg: '操作成功',
+            msg: '操作成功1',
             count: results.count,
             data: results.rows
         }
