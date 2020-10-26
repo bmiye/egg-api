@@ -13,7 +13,7 @@ class UserController extends Controller {
         console.log(ctx.query);
         const query = {
             limit: toInt(ctx.query.pageSize) || 10,
-            offset: (toInt(ctx.query.pageNum) - 1) * toInt(ctx.query.pageSize) || 0
+            offset: (toInt(ctx.query.pageNum) - 1) * toInt(ctx.query.pageSize) || 0,
         };
         const results = await ctx.model.User.findAndCountAll(query);
         // ctx.logger.info(results);
@@ -21,8 +21,8 @@ class UserController extends Controller {
             code: 0,
             msg: '操作成功123',
             count: results.count,
-            data: results.rows
-        }
+            data: results.rows,
+        };
     }
 
     async show() {
@@ -32,20 +32,16 @@ class UserController extends Controller {
 
     async create() {
         const ctx = this.ctx;
-        const {
-            name,
-            age,
-            sex
-        } = ctx.request.body;
+        const { name, age, sex } = ctx.request.body;
         const user = await ctx.model.User.create({
             name,
             age,
-            sex
+            sex,
         });
         console.log(user);
         ctx.body = {
             code: 0,
-            msg: '操作成功'
+            msg: '操作成功',
         };
     }
 
@@ -58,25 +54,21 @@ class UserController extends Controller {
         if (!user) {
             ctx.body = {
                 code: 1,
-                msg: '操作失败'
-            }
+                msg: '操作失败',
+            };
             return;
         }
 
-        const {
-            name,
-            age,
-            sex
-        } = ctx.request.body;
+        const { name, age, sex } = ctx.request.body;
         await user.update({
             name,
             age,
-            sex
+            sex,
         });
         ctx.body = {
             code: 0,
-            msg: '操作成功'
-        }
+            msg: '操作成功',
+        };
     }
 
     async destroy() {
@@ -89,15 +81,15 @@ class UserController extends Controller {
         if (!user) {
             ctx.body = {
                 code: 1,
-                msg: '操作失败'
-            }
+                msg: '操作失败',
+            };
             return;
         }
         await user.destroy();
         ctx.body = {
             code: 0,
-            msg: '操作成功'
-        }
+            msg: '操作成功',
+        };
     }
 }
 
